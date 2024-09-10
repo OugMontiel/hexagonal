@@ -10,6 +10,7 @@ const createServer = () => {
     app.use(limiTotal);
     
     app.use('/users',  userRoutes);
+    app.use('/producto',  userRoutes);
     return app;
 };
 
