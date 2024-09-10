@@ -6,36 +6,41 @@ class productService {
         this.productRepository = new productRepository();
     }
 
-    async getproductById(id) {
+    // Obtener producto por ID
+    async getProductById(id) {
         const product = await this.productRepository.getById(id);
         if (!product) {
-            throw new Error(JSON.stringify({status: 404, message: 'product not found'}));
+            throw new Error(JSON.stringify({ status: 404, message: 'Product not found' }));
         }
         return product;
     }
 
-    async createproduct(data) {
+    // Crear un nuevo producto
+    async createProduct(data) {
         // Puedes agregar validaciones o lógica adicional aquí antes de guardar
         return await this.productRepository.save(data);
     }
 
-    async updateproduct(id, data) {
-        const updatedproduct = await this.productRepository.updateById(id, data);
-        if (!updatedproduct) {
-            throw new Error(JSON.stringify({status: 404, message: 'product not found or could not be updated'}));
+    // Actualizar un producto existente
+    async updateProduct(id, data) {
+        const updatedProduct = await this.productRepository.updateById(id, data);
+        if (!updatedProduct) {
+            throw new Error(JSON.stringify({ status: 404, message: 'Product not found or could not be updated' }));
         }
-        return updatedproduct;
+        return updatedProduct;
     }
 
-    async deleteproduct(id) {
-        const deletedproduct = await this.productRepository.deleteById(id);
-        if (!deletedproduct) {
-            throw new Error(JSON.stringify({status: 404, message: 'product not found or could not be deleted'}));
-        }        
-        return deletedproduct;
+    // Eliminar un producto
+    async deleteProduct(id) {
+        const deletedProduct = await this.productRepository.deleteById(id);
+        if (!deletedProduct) {
+            throw new Error(JSON.stringify({ status: 404, message: 'Product not found or could not be deleted' }));
+        }
+        return deletedProduct;
     }
-    
-    async searchproductsByName(name) {
+
+    // Buscar productos por nombre
+    async searchProductsByName(name) {
         return await this.productRepository.searchByName(name);
     }
 }

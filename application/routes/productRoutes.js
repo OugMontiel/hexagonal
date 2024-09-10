@@ -1,17 +1,17 @@
 // Define las rutas de la aplicación y mapea las URLs a los controladores.
 const express = require('express');
-const productController = require('../controllers/productController.js');
-const productValidator = require('../validator/productValidator');
+const ProductController = require('../controllers/productController.js');
+const ProductValidator = require('../validator/productValidator.js');
 
 const router = express.Router();
-const productController = new productController();
-const productValidator = new productValidator();
+const productController = new ProductController();
+const productValidator = new ProductValidator();
 
-router.get('/:id', productValidator.validateproductId(), (req, res) => productController.getproduct(req, res));
-router.post('/', productValidator.validateproductData(), (req, res) => productController.createproduct(req, res));
-router.put('/:id', productValidator.validateproductUpdateDataById(), (req, res) => productController.updateproduct(req, res));
-router.delete('/:id', productValidator.validateproductId(), (req, res) => productController.deleteproduct(req, res));
-router.get('/search', (req, res) => productController.searchproducts(req, res));
+router.get('/:id', productValidator.validateProductId(), (req, res) => productController.getProduct(req, res));
+router.post('/', productValidator.validateProductData(), (req, res) => productController.createProduct(req, res));
+router.put('/:id', productValidator.validateProductUpdateDataById(), (req, res) => productController.updateProduct(req, res));
+router.delete('/:id', productValidator.validateProductId(), (req, res) => productController.deleteProduct(req, res));
+router.get('/search', (req, res) => productController.searchProducts(req, res));
 
 
 module.exports = router;

@@ -7,61 +7,83 @@ class productController {
         this.productService = new productService();
     }
 
-    async getproduct(req, res) {
+    // Obtener un producto por ID
+    async getProduct(req, res) {
         try {
             const errors = validationResult(req);
             if (!errors.isEmpty()) return res.status(400).json({ errors: errors.array() });
-            const product = await this.productService.getproductById(req.params.id);
+
+            const product = await this.productService.getProductById(req.params.id);
+            if (!product) {
+                return res.status(404).json({ message: 'Product not found' });
+            }
+
             res.status(200).json(product);
         } catch (error) {
             const errorObj = JSON.parse(error.message);
-            res.status(errorObj.status).json({ message: errorObj.message });
+            res.status(errorObj.status || 500).json({ message: errorObj.message });
         }
     }
 
-    async createproduct(req, res) {
+    // Crear un nuevo producto
+    async createProduct(req, res) {
         try {
             const errors = validationResult(req);
             if (!errors.isEmpty()) return res.status(400).json({ errors: errors.array() });
-            const product = await this.productService.createproduct(req.body);
+
+            const product = await this.productService.createProduct(req.body);
             res.status(201).json(product);
         } catch (error) {
             const errorObj = JSON.parse(error.message);
-            res.status(errorObj.status).json({ message: errorObj.message });
+            res.status(errorObj.status || 500).json({ message: errorObj.message });
         }
     }
 
-    async updateproduct(req, res) {
+    // Actualizar un producto existente
+    async updateProduct(req, res) {
         try {
             const errors = validationResult(req);
             if (!errors.isEmpty()) return res.status(400).json({ errors: errors.array() });
-            const product = await this.productService.updateproduct(req.params.id, req.body);
+
+            const product = await this.productService.updateProduct(req.params.id, req.body);
+            if (!product) {
+                return res.status(404).json({ message: 'Product not found' });
+            }
+
             res.status(200).json(product);
         } catch (error) {
             const errorObj = JSON.parse(error.message);
-            res.status(errorObj.status).json({ message: errorObj.message });
+            res.status(errorObj.status || 500).json({ message: errorObj.message });
         }
     }
 
-    async deleteproduct(req, res) {
+    // Eliminar un producto
+    async deleteProduct(req, res) {
         try {
             const errors = validationResult(req);
             if (!errors.isEmpty()) return res.status(400).json({ errors: errors.array() });
-            const product = await this.productService.deleteproduct(req.params.id);
-            // Este código indica que la solicitud fue exitosa y que el recurso ha sido eliminado, pero no hay contenido adicional para enviar en la respuesta.
-            res.status(204).json(product);
-            // En algunos casos, 200 OK también puede ser utilizado si la respuesta incluye información adicional o confirmación sobre la eliminación. Sin embargo, 204 No Content es la opción más estándar para indicar que un recurso ha sido eliminado y no hay contenido adicional en la respuesta.
-            // res.status(200).json(product);
+
+            const product = await this.productService.deleteProduct(req.params.id);
+            if (!product) {
+                return res.status(404).json({ message: 'Product not found' });
+            }
+
+            // 204 No Content para indicar que el recurso ha sido eliminado sin contenido adicional.
+            res.status(204).send();
         } catch (error) {
             const errorObj = JSON.parse(error.message);
-            res.status(errorObj.status).json({ message: errorObj.message });
+            res.status(errorObj.status || 500).json({ message: errorObj.message });
         }
     }
-    
-    async searchproducts(req, res) {
+
+    // Buscar productos por nombre
+    async searchProducts(req, res) {
         try {
-            const products = await this.productService.searchproductsByName(req.query.name);
-            res.json(products);
+            const products = await this.productService.searchProductsByName(req.query.name);
+            if (products.length === 0) {
+                return res.status(404).json({ message: 'No products found' });
+            }
+            res.status(200).json(products);
         } catch (error) {
             res.status(500).json({ message: error.message });
         }
