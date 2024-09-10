@@ -5,7 +5,8 @@ class productRepository {
     // Obtener producto por ID
     async getById(id) {
         try {
-            return await productModel.findById(id);
+            const product = new productModel;
+            return await product.findById(id);
         } catch (error) {
             throw new Error(JSON.stringify({ status: 400, message: 'Error retrieving product' }));
         }
@@ -14,8 +15,8 @@ class productRepository {
     // Guardar un nuevo producto
     async save(productData) {
         try {
-            const product = new productModel(productData);
-            return await product.save();
+            const product = new productModel;
+            return await product.insert(productData);
         } catch (error) {
             throw new Error(JSON.stringify({ status: 500, message: 'Error saving product' }));
         }
@@ -24,7 +25,8 @@ class productRepository {
     // Actualizar producto por ID
     async updateById(id, updateData) {
         try {
-            return await productModel.findByIdAndUpdate(id, updateData, { new: true, upsert: true });
+            const product = new productModel;
+            return await product.findByIdAndUpdate(id, updateData, { new: true, upsert: true });
         } catch (error) {
             throw new Error(JSON.stringify({ status: 500, message: 'Error updating product' }));
         }
@@ -33,7 +35,8 @@ class productRepository {
     // Eliminar producto por ID
     async deleteById(id) {
         try {
-            return await productModel.findByIdAndDelete(id);
+            const product = new productModel;
+            return await product.findByIdAndDelete(id);
         } catch (error) {
             throw new Error(JSON.stringify({ status: 404, message: 'Error deleting product' }));
         }
@@ -42,7 +45,8 @@ class productRepository {
     // Buscar productos por nombre
     async searchByName(name) {
         try {
-            return await productModel.find({ name: new RegExp(name, 'i') });
+            const product = new productModel;
+            return await product.find({ name: new RegExp(name, 'i') });
         } catch (error) {
             throw new Error(JSON.stringify({ status: 500, message: 'Error searching for products' }));
         }

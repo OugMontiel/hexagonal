@@ -21,9 +21,10 @@ class productModel {
         const collection = obj.db.collection('productos');
         const res = await collection.updateOne(
             { _id: new ObjectId(id) },
-            { $set: updateData },
-            { upsert: upsert }
+            { $set: updateData }
         );
+        console.log(res);
+        
         return res;
     }
 
