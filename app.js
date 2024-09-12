@@ -1,3 +1,5 @@
+const https = require('https');
+const fs = require('fs');
 const ConnectToDatabase = require('./infrastructure/database/mongodb');
 const createServer = require('./infrastructure/server/server');
 
@@ -6,8 +8,14 @@ const startApp = async () => {
     await connectToDatabase.connectOpen();
     const app = createServer();
 
-    app.listen({port: process.env.EXPRESS_PORT, host:process.env.EXPRESS_HOST}, () => {
-        console.log(`http://${process.env.EXPRESS_HOST}:${process.env.EXPRESS_PORT}`);
+    // Crear servidor HTTPS
+    const httpsServer = https.createServer({
+        key: fs.readFileSync('..infrastructure/ssl/private.key'),
+        cert: fs.readFileSync('.infrastructure/ssl/certificate.crt')
+    }, app);
+
+    httpsServer.listen({port: process.env.EXPRESS_PORT, host:process.env.EXPRESS_HOST}, () => {
+        console.log(`https://${process.env.EXPRESS_HOST}:${process.env.EXPRESS_PORT}`);
     });
 };
 
