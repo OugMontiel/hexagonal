@@ -10,8 +10,8 @@ const startApp = async () => {
 
     // Crear servidor HTTPS
     const httpsServer = https.createServer({
-        key: fs.readFileSync('..infrastructure/ssl/private.key'),
-        cert: fs.readFileSync('.infrastructure/ssl/certificate.crt')
+        key: fs.readFileSync('./infrastructure/ssl/private.key'),
+        cert: fs.readFileSync('./infrastructure/ssl/certificate.crt')
     }, app);
 
     httpsServer.listen({port: process.env.EXPRESS_PORT, host:process.env.EXPRESS_HOST}, () => {
