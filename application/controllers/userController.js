@@ -57,6 +57,18 @@ class UserController {
             res.status(errorObj.status).json({ message: errorObj.message });
         }
     }
+    async verifyUser(req, res) {
+        try{
+            const errors= validationResult(req);
+            if (!errors.isEmpty()) return res.status(400).json({errors:errors.array()});
+            const token = await this.userService.getUserbyNickAndPassword(res.body);
+            req.session.token= `Bearer ${token}`;
+            res.status(200).json(token)
+        } catch (error){
+            const errorObj= JSON.parse(error.message);
+            res.status(errorObj.status).json({message: errorObj.message});
+        }
+    }
     
     async searchUsers(req, res) {
         try {

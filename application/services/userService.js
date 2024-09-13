@@ -5,6 +5,14 @@ class UserService {
     constructor() {
         this.userRepository = new UserRepository();
     }
+    async getUserbyNickAndPassword(body){
+        const[user]=await this.userRepository.getNick(body);
+
+        if(!user) throw new Error(JSON.stringify({status:404, message:'usuario service'}));
+        const token = await this.userRepository.getPassword(body.passaword, user);
+        if (!token) throw new Error(JSON.stringify({status:404, message: 'pasword service'}));
+        return token;
+    }
 
     async getUserById(id) {
         const user = await this.userRepository.getById(id);

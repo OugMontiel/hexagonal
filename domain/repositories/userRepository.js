@@ -1,7 +1,34 @@
 // Contiene la interfaz para interactuar con la base de datos o cualquier otro tipo de almacenamiento de datos.
 const User = require('../models/userModel');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken')
 
 class UserRepository {
+    async getNick(body){
+        try {
+            const user = new User();
+            let {nick} = body;
+            let query= [{
+                $match:{nick}
+            },{
+                $project:{
+                    _id:0,
+                    role:0,
+                    email:0
+                }
+            }]
+            return await user.aggregate(query)
+        } catch (error) {
+            throw new Error(JSON.stringify({status:400,message:'usuarios repository'}));
+        }
+    }
+    async getPassword(passaword,user){
+        let {passaword:pass}=user
+        delete user.passaword
+        const isMatch = await bcrypt.compare(passaword, pass);
+        if(!isMatch) throw new Error(JSON.stringify({status:401, message: 'No autorizzado'}));
+        return jwt.sign(user, process.env.KEY_SECRET, {expiresIn: `${process.env.EXPRESS_EXPIRE}ms`});
+    }
     async getById(id) {
         try {
             const user = new User();
