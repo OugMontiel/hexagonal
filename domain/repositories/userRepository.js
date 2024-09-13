@@ -4,6 +4,38 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken')
 
 class UserRepository {
+    async getByNickAndPassword(nick, password) {
+        try {
+            const user = new User();
+            
+            // Definimos el pipeline para la agregación
+            let query = [
+                {
+                    $match: { nick, password }  // Filtramos por nick y password
+                },
+                {
+                    $project: {
+                        _id: 0,          // Excluimos el _id
+                        password: 0,     // Excluimos el password del resultado
+                        email: 0,        // Excluimos el email del resultado
+                        role: 0          // Excluimos el role del resultado
+                    }
+                }
+            ];
+            
+            // Ejecutamos la agregación en el modelo de usuario
+            const result = await user.aggregate(query);
+
+            // Devuelve el resultado si se encuentra, de lo contrario un error
+            if (result.length === 0) {
+                throw new Error(JSON.stringify({ status: 404, message: 'Invalid credentials' }));
+            }
+            
+            return result[0];  // Retornamos el primer (y único) resultado
+        } catch (error) {
+            throw new Error(JSON.stringify({status: 400, message: 'Error in user repository'}));
+        }
+    }
     async getNick(body){
         try {
             const user = new User();

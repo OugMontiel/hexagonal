@@ -5,6 +5,16 @@ class UserService {
     constructor() {
         this.userRepository = new UserRepository();
     }
+    async getNicknameByNickAndPassword(nick,password){
+       // Lógica para obtener el usuario desde el repositorio
+       const user = await this.userRepository.getByNickAndPassword(nick, password);
+
+       if (!user) {
+           throw new Error(JSON.stringify({status: 404, message: 'User not found or invalid credentials'}));
+       }
+
+       return user.nick;  // Devuelve el nickname si las credenciales son correctas
+   }
     async getUserbyNickAndPassword(body){
         const[user]=await this.userRepository.getNick(body);
 
