@@ -3,29 +3,29 @@
     <div class="signup-connect">
       <h1>Create your account</h1>
       <a href="#" class="btn btn-social btn-facebook">
-        <i class="fa fa-facebook"></i> Sign in with Facebook
+        <i class="pi pi-facebook"></i> Sign in with Facebook
       </a>
       <a href="#" class="btn btn-social btn-twitter">
-        <i class="fa fa-twitter"></i> Sign in with Twitter
+        <i class="pi pi-google"></i> Sign in with Google
       </a>
-      <a href="#" class="btn btn-social btn-google">
-        <i class="fa fa-google"></i> Sign in with Google
+      <a href="#" class="btn btn-social btn-discord">
+        <i class="pi pi-discord"></i> Sign in with Discord
       </a>
       <a href="#" class="btn btn-social btn-linkedin">
-        <i class="fa fa-linkedin"></i> Sign in with Linkedin
+        <i class="pi pi-linkedin"></i> Sign in with LinkedIn
       </a>
     </div>
     <div class="signup-classic">
       <h2>Or use the classical way</h2>
       <form @submit.prevent="signUp" class="form">
         <fieldset class="username">
-          <input type="text" v-model="username" placeholder="username" />
+          <input type="text" v-model="username" placeholder="Username" />
         </fieldset>
         <fieldset class="email">
-          <input type="email" v-model="email" placeholder="email" />
+          <input type="email" v-model="email" placeholder="Email" />
         </fieldset>
         <fieldset class="password">
-          <input type="password" v-model="password" placeholder="password" />
+          <input type="password" v-model="password" placeholder="Password" />
         </fieldset>
         <button type="submit" class="btn">Sign up</button>
       </form>
@@ -126,7 +126,7 @@ body {
   z-index: 1;
 }
 
-.fa {
+.pi {
   position: absolute;
   top: 0;
   left: 0;
@@ -140,19 +140,19 @@ body {
 }
 
 .btn-facebook {
-  background-color: hsl(221, 44%, 41%); /* Puedes mantener los colores de redes sociales */
+  background-color: #3b5998;
 }
 
 .btn-twitter {
-  background-color: hsl(206, 82%, 63%);
+  background-color: #00aced;
 }
 
-.btn-google {
-  background-color: hsl(7, 71%, 55%);
+.btn-discord {
+  background-color: #7289da;
 }
 
 .btn-linkedin {
-  background-color: hsl(196, 100%, 43%);
+  background-color: #0077b5;
 }
 
 .form fieldset {
