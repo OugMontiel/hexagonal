@@ -76,14 +76,17 @@ const privateKey = fs.readFileSync('./private.key');
 const certificate = fs.readFileSync('./certificate.crt');
 
 // Crear servidor HTTPS
-const httpsServer = https.createServer({
+const httpsServer = https.createServer(
+  {
     key: privateKey,
-    cert: certificate
-}, app);
+    cert: certificate,
+  },
+  app
+);
 
 const port = 3443; // Puerto HTTPS estándar
 httpsServer.listen(port, () => {
-    console.log(`Servidor HTTPS escuchando en el puerto ${port}`);
+  console.log(`Servidor HTTPS escuchando en el puerto ${port}`);
 });
 ```
 

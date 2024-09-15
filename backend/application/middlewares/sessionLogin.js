@@ -1,12 +1,14 @@
-const session = require("express-session")
-const sessionAuth = require('express').Router()
+const session = require('express-session');
+const sessionAuth = require('express').Router();
 
-module.exports = sessionAuth.use(session({
+module.exports = sessionAuth.use(
+  session({
     secret: process.env.KEY_SECRET,
     resave: false,
-    saveUninitialized:true,
-    cookie:{
-        secure: true,
-        maxAge: parseInt(process.env.EXPRESS_EXPIRE)
-    }
-}))
+    saveUninitialized: true,
+    cookie: {
+      secure: true,
+      maxAge: parseInt(process.env.EXPRESS_EXPIRE),
+    },
+  })
+);

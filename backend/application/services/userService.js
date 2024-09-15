@@ -2,60 +2,83 @@
 const UserRepository = require('../../domain/repositories/userRepository');
 
 class UserService {
-    constructor() {
-        this.userRepository = new UserRepository();
-    }
-    async getNicknameByNickAndPassword(nick,password){
-       // Lógica para obtener el usuario desde el repositorio
-       const user = await this.userRepository.getByNickAndPassword(nick, password);
+  constructor() {
+    this.userRepository = new UserRepository();
+  }
+  async getNicknameByNickAndPassword(nick, password) {
+    // Lógica para obtener el usuario desde el repositorio
+    const user = await this.userRepository.getByNickAndPassword(nick, password);
 
-       if (!user) {
-           throw new Error(JSON.stringify({status: 404, message: 'User not found or invalid credentials'}));
-       }
-
-       return user.nick;  // Devuelve el nickname si las credenciales son correctas
-   }
-    async getUserbyNickAndPassword(body){
-        const[user]=await this.userRepository.getNick(body);
-
-        if(!user) throw new Error(JSON.stringify({status:404, message:'usuario service'}));
-        const token = await this.userRepository.getPassword(body.passaword, user);
-        if (!token) throw new Error(JSON.stringify({status:404, message: 'pasword service'}));
-        return token;
+    if (!user) {
+      throw new Error(
+        JSON.stringify({
+          status: 404,
+          message: 'User not found or invalid credentials',
+        })
+      );
     }
 
-    async getUserById(id) {
-        const user = await this.userRepository.getById(id);
-        if (!user) {
-            throw new Error(JSON.stringify({status: 404, message: 'User not found'}));
-        }
-        return user;
-    }
+    return user.nick; // Devuelve el nickname si las credenciales son correctas
+  }
+  async getUserbyNickAndPassword(body) {
+    const [user] = await this.userRepository.getNick(body);
 
-    async createUser(data) {
-        // Puedes agregar validaciones o lógica adicional aquí antes de guardar
-        return await this.userRepository.save(data);
-    }
+    if (!user)
+      throw new Error(
+        JSON.stringify({ status: 404, message: 'usuario service' })
+      );
+    const token = await this.userRepository.getPassword(body.passaword, user);
+    if (!token)
+      throw new Error(
+        JSON.stringify({ status: 404, message: 'pasword service' })
+      );
+    return token;
+  }
 
-    async updateUser(id, data) {
-        const updatedUser = await this.userRepository.updateById(id, data);
-        if (!updatedUser) {
-            throw new Error(JSON.stringify({status: 404, message: 'User not found or could not be updated'}));
-        }
-        return updatedUser;
+  async getUserById(id) {
+    const user = await this.userRepository.getById(id);
+    if (!user) {
+      throw new Error(
+        JSON.stringify({ status: 404, message: 'User not found' })
+      );
     }
+    return user;
+  }
 
-    async deleteUser(id) {
-        const deletedUser = await this.userRepository.deleteById(id);
-        if (!deletedUser) {
-            throw new Error(JSON.stringify({status: 404, message: 'User not found or could not be deleted'}));
-        }        
-        return deletedUser;
+  async createUser(data) {
+    // Puedes agregar validaciones o lógica adicional aquí antes de guardar
+    return await this.userRepository.save(data);
+  }
+
+  async updateUser(id, data) {
+    const updatedUser = await this.userRepository.updateById(id, data);
+    if (!updatedUser) {
+      throw new Error(
+        JSON.stringify({
+          status: 404,
+          message: 'User not found or could not be updated',
+        })
+      );
     }
-    
-    async searchUsersByName(name) {
-        return await this.userRepository.searchByName(name);
+    return updatedUser;
+  }
+
+  async deleteUser(id) {
+    const deletedUser = await this.userRepository.deleteById(id);
+    if (!deletedUser) {
+      throw new Error(
+        JSON.stringify({
+          status: 404,
+          message: 'User not found or could not be deleted',
+        })
+      );
     }
+    return deletedUser;
+  }
+
+  async searchUsersByName(name) {
+    return await this.userRepository.searchByName(name);
+  }
 }
 
 module.exports = UserService;

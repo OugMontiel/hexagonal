@@ -24,5 +24,7 @@ a {
 }
 
 a:hover {
-  background-color: var(--vt-c-divider-light-1); /* Fondo al hacer hover, usando un color suave */
+  background-color: var(
+    --vt-c-divider-light-1
+  ); /* Fondo al hacer hover, usando un color suave */
 }

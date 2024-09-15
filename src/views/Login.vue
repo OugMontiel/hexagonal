@@ -1,189 +1,188 @@
 <template>
-    <div class="signup">
-      <div class="signup-connect">
-        <h1>Create your account</h1>
-        <a href="#" class="btn btn-social btn-facebook">
-          <i class="fa fa-facebook"></i> Sign in with Facebook
-        </a>
-        <a href="#" class="btn btn-social btn-twitter">
-          <i class="fa fa-twitter"></i> Sign in with Twitter
-        </a>
-        <a href="#" class="btn btn-social btn-google">
-          <i class="fa fa-google"></i> Sign in with Google
-        </a>
-        <a href="#" class="btn btn-social btn-linkedin">
-          <i class="fa fa-linkedin"></i> Sign in with Linkedin
-        </a>
-      </div>
-      <div class="signup-classic">
-        <h2>Or use the classical way</h2>
-        <form @submit.prevent="signUp" class="form">
-          <fieldset class="username">
-            <input type="text" v-model="username" placeholder="username" />
-          </fieldset>
-          <fieldset class="email">
-            <input type="email" v-model="email" placeholder="email" />
-          </fieldset>
-          <fieldset class="password">
-            <input type="password" v-model="password" placeholder="password" />
-          </fieldset>
-          <button type="submit" class="btn">Sign up</button>
-        </form>
-      </div>
+  <div class="signup">
+    <div class="signup-connect">
+      <h1>Create your account</h1>
+      <a href="#" class="btn btn-social btn-facebook">
+        <i class="fa fa-facebook"></i> Sign in with Facebook
+      </a>
+      <a href="#" class="btn btn-social btn-twitter">
+        <i class="fa fa-twitter"></i> Sign in with Twitter
+      </a>
+      <a href="#" class="btn btn-social btn-google">
+        <i class="fa fa-google"></i> Sign in with Google
+      </a>
+      <a href="#" class="btn btn-social btn-linkedin">
+        <i class="fa fa-linkedin"></i> Sign in with Linkedin
+      </a>
     </div>
-  </template>
-  
-  <script>
-  export default {
-    data() {
-      return {
-        username: '',
-        email: '',
-        password: '',
-      };
+    <div class="signup-classic">
+      <h2>Or use the classical way</h2>
+      <form @submit.prevent="signUp" class="form">
+        <fieldset class="username">
+          <input type="text" v-model="username" placeholder="username" />
+        </fieldset>
+        <fieldset class="email">
+          <input type="email" v-model="email" placeholder="email" />
+        </fieldset>
+        <fieldset class="password">
+          <input type="password" v-model="password" placeholder="password" />
+        </fieldset>
+        <button type="submit" class="btn">Sign up</button>
+      </form>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      username: '',
+      email: '',
+      password: '',
+    };
+  },
+  methods: {
+    signUp() {
+      // Aquí puedes manejar la lógica del registro
+      console.log('User signed up:', this.username, this.email, this.password);
     },
-    methods: {
-      signUp() {
-        // Aquí puedes manejar la lógica del registro
-        console.log('User signed up:', this.username, this.email, this.password);
-      },
-    },
-  };
-  </script>
-  
-  <style scoped>
-  /* Aquí se adapta el CSS que proporcionaste al formato Vue */
-  *,
-  *::before,
-  *::after {
-    box-sizing: border-box;
-  }
-  
-  html,
-  body {
-    height: 100%;
-    font-family: 'Open Sans', sans-serif;
-  }
-  
-  body {
-    background: hsl(86, 85%, 95%);
-  }
-  
-  .signup {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 1;
-    width: 800px;
-    background: hsl(0, 0, 100%);
-    border-radius: 10px;
-    box-shadow: 0 3px 25px hsla(0, 0, 0, 0.2);
-    overflow: hidden;
-    display: flex;
-  }
-  
-  .signup-connect,
-  .signup-classic {
-    width: 50%;
-    padding: 30px 50px;
-  }
-  
-  .signup-connect {
-    background: linear-gradient(134deg, hsl(44, 96%, 65%), hsl(34, 95%, 45%));
-    color: hsl(0, 0, 100%);
-  
-    h1 {
-      font-size: 30px;
-      margin-top: 10px;
-      margin-bottom: 40px;
-      text-shadow: 0 2px 3px hsla(0, 0, 0, 0.1);
-    }
-  }
-  
-  .signup-classic h2 {
-    font-size: 16px;
-    font-weight: normal;
-    margin-top: 23px;
-    margin-bottom: 43px;
+  },
+};
+</script>
+
+<style scoped>
+/* Aquí se adapta el CSS que proporcionaste al formato Vue */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  font-family: 'Open Sans', sans-serif;
+}
+
+body {
+  background: hsl(86, 85%, 95%);
+}
+
+.signup {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  width: 800px;
+  background: hsl(0, 0, 100%);
+  border-radius: 10px;
+  box-shadow: 0 3px 25px hsla(0, 0, 0, 0.2);
+  overflow: hidden;
+  display: flex;
+}
+
+.signup-connect,
+.signup-classic {
+  width: 50%;
+  padding: 30px 50px;
+}
+
+.signup-connect {
+  background: linear-gradient(134deg, hsl(44, 96%, 65%), hsl(34, 95%, 45%));
+  color: hsl(0, 0, 100%);
+
+  h1 {
+    font-size: 30px;
+    margin-top: 10px;
+    margin-bottom: 40px;
     text-shadow: 0 2px 3px hsla(0, 0, 0, 0.1);
   }
-  
-  .btn {
-    display: block;
-    background: hsl(86, 76%, 71%);
-    color: hsl(0, 0, 100%);
-    text-decoration: none;
-    margin: 20px 0;
-    padding: 15px 15px;
-    border-radius: 5px;
-    position: relative;
-  }
-  
-  .btn-social {
-    padding-left: 64px;
-    position: relative;
-    z-index: 1;
-  }
-  
-  .fa {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 1;
-    width: 50px;
-    height: 100%;
-    text-align: center;
-    background: hsla(0, 0, 0, 0.1);
-    line-height: 3.2;
-    border-radius: 5px 0 0 5px;
-  }
-  
-  .btn-facebook {
-    background-color: hsl(221, 44%, 41%);
-  }
-  
-  .btn-twitter {
-    background-color: hsl(206, 82%, 63%);
-  }
-  
-  .btn-google {
-    background-color: hsl(7, 71%, 55%);
-  }
-  
-  .btn-linkedin {
-    background-color: hsl(196, 100%, 43%);
-  }
-  
-  .form fieldset {
-    border: none;
-    padding: 0;
-    margin: 20px 0;
-    position: relative;
-  }
-  
-  .form input {
-    width: 100%;
-    height: 48px;
-    color: hsl(0, 0, 20%);
-    padding: 15px 40px 15px 15px;
-    border-radius: 5px;
-    font-size: 14px;
-    outline: none !important;
-    border: 1px solid hsla(0, 0, 0, 0.3);
-    box-shadow: inset 0 1px 4px hsla(0, 0, 0, 0.2);
-    vertical-align: top;
-  }
-  
-  button {
-    width: 100%;
-    outline: none !important;
-    background: linear-gradient(-5deg, hsl(86, 61%, 44%), hsl(86, 65%, 54%));
-    border: none;
-    text-transform: uppercase;
-    font-weight: bold;
-    box-shadow: 0 3px 0px hsla(86, 21%, 44%, 0.2);
-    text-shadow: 0 2px 3px hsla(0, 0, 0, 0.2);
-  }
-  </style>
-  
+}
+
+.signup-classic h2 {
+  font-size: 16px;
+  font-weight: normal;
+  margin-top: 23px;
+  margin-bottom: 43px;
+  text-shadow: 0 2px 3px hsla(0, 0, 0, 0.1);
+}
+
+.btn {
+  display: block;
+  background: hsl(86, 76%, 71%);
+  color: hsl(0, 0, 100%);
+  text-decoration: none;
+  margin: 20px 0;
+  padding: 15px 15px;
+  border-radius: 5px;
+  position: relative;
+}
+
+.btn-social {
+  padding-left: 64px;
+  position: relative;
+  z-index: 1;
+}
+
+.fa {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 50px;
+  height: 100%;
+  text-align: center;
+  background: hsla(0, 0, 0, 0.1);
+  line-height: 3.2;
+  border-radius: 5px 0 0 5px;
+}
+
+.btn-facebook {
+  background-color: hsl(221, 44%, 41%);
+}
+
+.btn-twitter {
+  background-color: hsl(206, 82%, 63%);
+}
+
+.btn-google {
+  background-color: hsl(7, 71%, 55%);
+}
+
+.btn-linkedin {
+  background-color: hsl(196, 100%, 43%);
+}
+
+.form fieldset {
+  border: none;
+  padding: 0;
+  margin: 20px 0;
+  position: relative;
+}
+
+.form input {
+  width: 100%;
+  height: 48px;
+  color: hsl(0, 0, 20%);
+  padding: 15px 40px 15px 15px;
+  border-radius: 5px;
+  font-size: 14px;
+  outline: none !important;
+  border: 1px solid hsla(0, 0, 0, 0.3);
+  box-shadow: inset 0 1px 4px hsla(0, 0, 0, 0.2);
+  vertical-align: top;
+}
+
+button {
+  width: 100%;
+  outline: none !important;
+  background: linear-gradient(-5deg, hsl(86, 61%, 44%), hsl(86, 65%, 54%));
+  border: none;
+  text-transform: uppercase;
+  font-weight: bold;
+  box-shadow: 0 3px 0px hsla(86, 21%, 44%, 0.2);
+  text-shadow: 0 2px 3px hsla(0, 0, 0, 0.2);
+}
+</style>
