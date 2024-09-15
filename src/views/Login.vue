@@ -52,7 +52,7 @@ export default {
 </script>
 
 <style scoped>
-/* Aquí se adapta el CSS que proporcionaste al formato Vue */
+/* Adaptación del CSS para usar las variables de color proporcionadas */
 *,
 *::before,
 *::after {
@@ -66,7 +66,7 @@ body {
 }
 
 body {
-  background: hsl(86, 85%, 95%);
+  background: var(--vt-c-white); /* Cambiado a blanco */
 }
 
 .signup {
@@ -76,9 +76,9 @@ body {
   transform: translate(-50%, -50%);
   z-index: 1;
   width: 800px;
-  background: hsl(0, 0, 100%);
+  background: var(--vt-c-white); /* Fondo blanco */
   border-radius: 10px;
-  box-shadow: 0 3px 25px hsla(0, 0, 0, 0.2);
+  box-shadow: 0 3px 25px var(--vt-c-divider-light-1); /* Usando el color del divisor */
   overflow: hidden;
   display: flex;
 }
@@ -90,14 +90,14 @@ body {
 }
 
 .signup-connect {
-  background: linear-gradient(134deg, hsl(44, 96%, 65%), hsl(34, 95%, 45%));
-  color: hsl(0, 0, 100%);
+  background: var(--vt-c-indigo); /* Fondo índigo */
+  color: var(--vt-c-white); /* Texto blanco */
 
   h1 {
     font-size: 30px;
     margin-top: 10px;
     margin-bottom: 40px;
-    text-shadow: 0 2px 3px hsla(0, 0, 0, 0.1);
+    text-shadow: 0 2px 3px var(--vt-c-divider-light-1); /* Sombra ligera */
   }
 }
 
@@ -106,13 +106,13 @@ body {
   font-weight: normal;
   margin-top: 23px;
   margin-bottom: 43px;
-  text-shadow: 0 2px 3px hsla(0, 0, 0, 0.1);
+  text-shadow: 0 2px 3px var(--vt-c-divider-light-1); /* Sombra ligera */
 }
 
 .btn {
   display: block;
-  background: hsl(86, 76%, 71%);
-  color: hsl(0, 0, 100%);
+  background: var(--vt-c-indigo); /* Fondo índigo */
+  color: var(--vt-c-white); /* Texto blanco */
   text-decoration: none;
   margin: 20px 0;
   padding: 15px 15px;
@@ -134,13 +134,13 @@ body {
   width: 50px;
   height: 100%;
   text-align: center;
-  background: hsla(0, 0, 0, 0.1);
+  background: var(--vt-c-divider-light-1); /* Fondo divisor ligero */
   line-height: 3.2;
   border-radius: 5px 0 0 5px;
 }
 
 .btn-facebook {
-  background-color: hsl(221, 44%, 41%);
+  background-color: hsl(221, 44%, 41%); /* Puedes mantener los colores de redes sociales */
 }
 
 .btn-twitter {
@@ -165,24 +165,24 @@ body {
 .form input {
   width: 100%;
   height: 48px;
-  color: hsl(0, 0, 20%);
+  color: var(--vt-c-black); /* Texto negro */
   padding: 15px 40px 15px 15px;
   border-radius: 5px;
   font-size: 14px;
   outline: none !important;
-  border: 1px solid hsla(0, 0, 0, 0.3);
-  box-shadow: inset 0 1px 4px hsla(0, 0, 0, 0.2);
+  border: 1px solid var(--vt-c-divider-light-1); /* Borde ligero */
+  box-shadow: inset 0 1px 4px var(--vt-c-divider-light-1); /* Sombra interior */
   vertical-align: top;
 }
 
 button {
   width: 100%;
   outline: none !important;
-  background: linear-gradient(-5deg, hsl(86, 61%, 44%), hsl(86, 65%, 54%));
+  background: linear-gradient(-5deg, var(--vt-c-indigo), var(--vt-c-text-light-1)); /* Fondo gradiente usando índigo */
   border: none;
   text-transform: uppercase;
   font-weight: bold;
-  box-shadow: 0 3px 0px hsla(86, 21%, 44%, 0.2);
-  text-shadow: 0 2px 3px hsla(0, 0, 0, 0.2);
+  box-shadow: 0 3px 0px var(--vt-c-divider-light-1); /* Sombra ligera */
+  text-shadow: 0 2px 3px var(--vt-c-divider-light-1); /* Sombra de texto */
 }
 </style>
