@@ -12,7 +12,7 @@ class UserController {
       const errors = validationResult(req);
       if (!errors.isEmpty())
         return res.status(400).json({ errors: errors.array() });
-      const user = await this.userService.getNicknameByNickAndPassword(
+      const user = await this.userService.getUserByNickAndPassword(
         req.body.nick,
         req.body.password
       );

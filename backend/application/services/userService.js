@@ -5,9 +5,9 @@ class UserService {
   constructor() {
     this.userRepository = new UserRepository();
   }
-  async getNicknameByNickAndPassword(nick, password) {
+  async getUserByNickAndPassword(nick, password) {
     // Lógica para obtener el usuario desde el repositorio
-    const user = await this.userRepository.getByNickAndPassword(nick, password);
+    const user = await this.userRepository.getNickByNickAndPassword(nick, password);
 
     if (!user) {
       throw new Error(

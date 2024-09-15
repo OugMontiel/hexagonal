@@ -5,7 +5,9 @@ class User {
   async aggregate(data) {
     let obj = ConnectToDatabase.instanceConnect;
     const collection = obj.db.collection('cliente');
+    // console.log('querry: ',[...data]);
     const res = await collection.aggregate([...data]).toArray();
+    // console.log(res);
     return res;
   }
   async findById(id) {

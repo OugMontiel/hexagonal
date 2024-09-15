@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 class UserRepository {
-  async getByNickAndPassword(nick, password) {
+  async getNickByNickAndPassword(nick, password) {
     try {
       const user = new User();
 
@@ -16,9 +16,7 @@ class UserRepository {
         {
           $project: {
             _id: 0, // Excluimos el _id
-            password: 0, // Excluimos el password del resultado
-            email: 0, // Excluimos el email del resultado
-            role: 0, // Excluimos el role del resultado
+            nick: 1,
           },
         },
       ];
@@ -27,17 +25,25 @@ class UserRepository {
       const result = await user.aggregate(query);
 
       // Devuelve el resultado si se encuentra, de lo contrario un error
+      // console.log('resultado Encontrado', result.length);
       if (result.length === 0) {
         throw new Error(
           JSON.stringify({ status: 404, message: 'Invalid credentials' })
         );
       }
-
+      // console.log(result[0]);
+      
       return result[0]; // Retornamos el primer (y único) resultado
     } catch (error) {
-      throw new Error(
-        JSON.stringify({ status: 400, message: 'Error in user repository' })
-      );
+      // Si el error ya tiene un mensaje específico, lo relanzamos
+      if (error.message.includes('Invalid credentials')) {
+        throw error; // Propaga el error original
+      } else {
+        // Si es un error inesperado, lanzamos uno genérico
+        throw new Error(
+          JSON.stringify({ status: 400, message: 'Error in user repository'})
+        );
+      }
     }
   }
   async getNick(body) {
