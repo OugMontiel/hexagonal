@@ -1,0 +1,52 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Node modules
+node_modules/
+
+# OS-specific
+.DS_Store
+
+# Dist directory
+dist/
+dist-ssr/
+coverage/
+*.local
+
+# Cypress
+/cypress/videos/
+/cypress/screenshots/
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json  # Excepción para compartir configuraciones de extensiones
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# TypeScript build info
+*.tsbuildinfo
+
+# Certificados SSL (Backend)
+backend/infrastructure/ssl/certificate.*
+backend/infrastructure/ssl/private.key
+
+# Archivos de configuración repetidos para futura división (Frontend y Backend)
+backend/package.json
+frontend/package.json
+
+# Variables de entorno
+.env
+
+# Yarn/Node Debug
+npm-debug.log
+yarn-error.log
+pnpm-debug.log
