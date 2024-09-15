@@ -8,10 +8,14 @@ const startApp = async () => {
     await connectToDatabase.connectOpen();
     const app = createServer();
 
+    // Cargar certificado y clave privada
+    const privateKey = fs.readFileSync('./backend/infrastructure/ssl/private.key');
+    const certificate = fs.readFileSync('./backend/infrastructure/ssl/certificate.crt');
+
     // Crear servidor HTTPS
     const httpsServer = https.createServer({
-        key: fs.readFileSync('./infrastructure/ssl/private.key'),
-        cert: fs.readFileSync('./infrastructure/ssl/certificate.crt')
+        key: privateKey,
+        cert: certificate
     }, app);
 
     httpsServer.listen({port: process.env.EXPRESS_PORT, host:process.env.EXPRESS_HOST}, () => {
