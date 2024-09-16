@@ -23,6 +23,8 @@
     "https": "^1.0.0",
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.8.0",
+    "passport": "^0.7.0",
+    "passport-google-oidc": "^0.1.0",
     "primeicons": "^7.0.0",
     "primevue": "^4.0.7",
     "vue": "^3.4.29",
