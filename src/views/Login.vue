@@ -27,7 +27,7 @@
         <fieldset class="password">
           <input type="password" v-model="password" placeholder="Password" />
         </fieldset>
-        <button type="submit" class="btn">Sign up</button>
+        <button type="submit" class="btn" :disabled="!isFormValid">Sign up</button>
       </form>
     </div>
   </div>
@@ -42,10 +42,49 @@ export default {
       password: '',
     };
   },
+  computed: {
+    isFormValid() {
+      // Verificamos que los tres campos estén llenos
+      return this.username && this.email && this.password;
+    },
+  },
   methods: {
-    signUp() {
-      // Aquí puedes manejar la lógica del registro
-      console.log('User signed up:', this.username, this.email, this.password);
+    async signUp() {
+      try {
+        // console.log('Host:', import.meta.env.VITE_EXPRESS_HOST);
+        // console.log('Port:', import.meta.env.VITE_EXPRESS_PORT);
+
+        // Enviamos la solicitud POST con el cuerpo JSON
+        const response = await fetch(`https://${import.meta.env.VITE_EXPRESS_HOST}:${import.meta.env.VITE_EXPRESS_PORT}/users/login`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            nick: this.username, // Mapeamos el "username" al "nick" que espera el backend
+            email: this.email,
+            password: this.password,
+          }),
+        });
+
+        // Parseamos la respuesta
+        const data = await response.json();
+
+        // console.log('response.data', data);
+
+        if (response.ok) {
+          // Manejo del éxito (redireccionar, mostrar mensaje, etc.)
+          console.log('Login successful:', data);
+          // Puedes guardar el token en localStorage o redirigir a otra página
+        } else {
+          // Manejo del error
+          console.error('Login failed:', data.message);
+          alert('Login failed: ' + data.message);
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        alert('An error occurred during login');
+      }
     },
   },
 };
