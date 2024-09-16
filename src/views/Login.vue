@@ -5,7 +5,7 @@
       <a href="#" class="btn btn-social btn-facebook">
         <i class="pi pi-facebook"></i> Sign in with Facebook
       </a>
-      <a href="#" class="btn btn-social btn-twitter">
+      <a :href="googleLoginUrl" class="btn btn-social btn-twitter">
         <i class="pi pi-google"></i> Sign in with Google
       </a>
       <a href="#" class="btn btn-social btn-discord">
@@ -40,6 +40,7 @@ export default {
       username: '',
       email: '',
       password: '',
+      googleLoginUrl: `https://${import.meta.env.VITE_EXPRESS_HOST}:${import.meta.env.VITE_EXPRESS_PORT}/users/loginGoogle`, // Ajusta esta URL
     };
   },
   computed: {
