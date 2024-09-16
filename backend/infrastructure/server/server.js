@@ -6,12 +6,22 @@ const { jsonParseErrorHandler } = require('../middlewares/errorHandling');
 const { limiTotal } = require('../middlewares/rateLimit');
 const { auth } = require('../../application/middlewares/authenticateToken');
 const sessionAuth = require('../../application/middlewares/sessionLogin');
+const cors = require('cors');
 
 const createServer = () => {
   const app = express();
   app.use(express.json());
   app.use(jsonParseErrorHandler);
   app.use(limiTotal);
+  
+  // Configuración de CORS
+  app.use(
+    cors({
+      origin: 'http://localhost:5173', // Origen permitido
+      methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+      allowedHeaders: ['Content-Type', 'Authorization'],
+    })
+  );
 
   app.use('/users', userRoutes);
   app.use('/producto', sessionAuth, auth, productRoutes);
