@@ -33,7 +33,11 @@ class AuthController {
       });
 
       // Establecer la cookie con el token JWT
-      res.cookie('authToken', `Bearer ${token}`, { httpOnly: true });
+      res.cookie('authToken', `Bearer ${token}`, {
+        httpOnly: true,
+        secure: true , // Cambia a true en producción con HTTPS
+        sameSite: 'None', // Necesario para trabajar en entornos cross-origin
+      });
 
       // Enviar respuesta de éxito con el token
       res.status(201).json({ token });

@@ -36,6 +36,7 @@ const createServer = () => {
       origin: 'http://localhost:5173', // Origen permitido
       methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
       allowedHeaders: ['Content-Type', 'Authorization'],
+      credentials: true, // Habilita el envío de cookies/credenciales
     })
   );
 

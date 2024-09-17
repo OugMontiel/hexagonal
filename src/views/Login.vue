@@ -56,8 +56,9 @@ export default {
         // console.log('Port:', import.meta.env.VITE_EXPRESS_PORT);
 
         // Enviamos la solicitud POST con el cuerpo JSON
-        const response = await fetch(`https://${import.meta.env.VITE_EXPRESS_HOST}:${import.meta.env.VITE_EXPRESS_PORT}/users/login`, {
+        const response = await fetch(`https://${import.meta.env.VITE_EXPRESS_HOST}:${import.meta.env.VITE_EXPRESS_PORT}/auth/sessionLogin`, {
           method: 'POST',
+          credentials: 'include', // Esto permite que se envíen cookies en la solicitud
           headers: {
             'Content-Type': 'application/json',
           },
