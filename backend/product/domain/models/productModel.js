@@ -1,5 +1,5 @@
 const { ObjectId } = require('mongodb');
-const ConnectToDatabase = require('../../infrastructure/database/mongodb');
+const ConnectToDatabase = require('../../../infrastructure/database/mongodb');
 
 class productModel {
   async findById(id) {

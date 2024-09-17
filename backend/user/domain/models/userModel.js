@@ -1,5 +1,5 @@
 const { ObjectId } = require('mongodb');
-const ConnectToDatabase = require('../../infrastructure/database/mongodb');
+const ConnectToDatabase = require('../../../infrastructure/database/mongodb');
 // Define el modelo de usuario y la lógica de negocio independiente de la tecnología de persistencia.
 class User {
   async aggregate(data) {
