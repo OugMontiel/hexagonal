@@ -2,6 +2,7 @@
 const express = require('express');
 
 // Carga de otro Routers 
+const authRouter = require('../../auth/application/routes/authRouter');
 const userRoutes = require('../../user/application/routes/userRoutes');
 const productRoutes = require('../../product/application/routes/productRoutes');
 
@@ -33,6 +34,7 @@ const createServer = () => {
   );
 
   // Routes
+  app.use('/auth', authRouter);
   app.use('/users', userRoutes);
   app.use('/producto', sessionAuth, auth, productRoutes);
   
