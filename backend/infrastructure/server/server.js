@@ -16,7 +16,8 @@ const sessionAuth = require('../../auth/application/middlewares/sessionLogin');
 // Permitir conxiones de otros puertos
 const cors = require('cors');
 
-// configuracion para passport
+// configuracion para login
+const cookieParser = require('cookie-parser');
 const passport = require('passport');
 const passportConfig = require('../../auth/infrastructure/passportConfig'); // Importa la configuración de Passport
 
@@ -41,16 +42,21 @@ const createServer = () => {
   // Configura la sesión
   app.use(
     session({
-      secret: process.env.SESSION_SECRET,
+      secret: process.env.KEY_SECRET,
       resave: false,
       saveUninitialized: false,
-      cookie: { secure: true }
+      cookie: { 
+        secure: true
+      }
     })
   );
 
   // Inicializa Passport y maneja la sesión
   app.use(passport.initialize());
   app.use(passport.session());
+
+  // Inicializacion de cookies 
+  app.use(cookieParser());
 
   // Routes
   app.use('/auth', authRouter);

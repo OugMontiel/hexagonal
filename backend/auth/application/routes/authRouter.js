@@ -8,11 +8,6 @@ const router = express.Router();
 const authController = new AuthController();
 const authValidator = new AuthValidator();
 
-// Define la ruta para iniciar sesión mediante cookies.
-router.post('/sessionLogin', authValidator.validatorSessionLogin(), (req, res) =>
-  authController.sessionLogin(req, res)
-);
-
 // Define la ruta para iniciar sesión mediante sesión Express.
 router.post('/sessionLogin', authValidator.validatorSessionLogin(), (req, res) =>
     authController.sessionLogin(req, res)
