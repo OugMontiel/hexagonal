@@ -7,32 +7,6 @@ class UserController {
   constructor() {
     this.userService = new UserService();
   }
-  async login(req, res) {
-    try {
-      const errors = validationResult(req);
-      if (!errors.isEmpty())
-        return res.status(400).json({ errors: errors.array() });
-      const user = await this.userService.getUserByNickAndPassword(
-        req.body.nick,
-        req.body.password
-      );
-      if (!user) {
-        return res.status(401).json({ error: 'Invalid credentials' });
-      }
-      const token = jwt.sign({ nick: req.body.nick }, 'clave', {
-        expiresIn: '60s',
-      });
-
-      // Establecer la cookie con el token JWT
-      res.cookie('authToken', `Bearer ${token}`, { httpOnly: true });
-
-      // Enviar respuesta de éxito con la información del usuario
-      res.status(201).json({ token });
-    } catch (error) {
-      const errorObj = JSON.parse(error.message);
-      res.status(errorObj.status).json({ message: errorObj.message });
-    }
-  }
 
   async getUser(req, res) {
     try {

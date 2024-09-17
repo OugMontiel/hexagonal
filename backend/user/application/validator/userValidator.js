@@ -1,16 +1,6 @@
 const { body, query, param } = require('express-validator');
 const { ObjectId } = require('mongodb');
 class UserValidator {
-  validatorLogin = () => {
-    return [
-      body('nick')
-        .notEmpty()
-        .isString()
-        .withMessage('Send the nickname you will have in the system'),
-      body('password').notEmpty().isString().withMessage('send a password'),
-      body('email').notEmpty().isEmail().withMessage('Send the email'),
-    ];
-  };
   validateUserData = () => {
     return [
       body('cedula')
