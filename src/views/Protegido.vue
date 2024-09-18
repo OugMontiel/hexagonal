@@ -97,7 +97,6 @@
 }
 
 html {
-  /* font-size: 62.5%; */
   overflow-x: hidden;
 }
 
@@ -107,17 +106,15 @@ html {
   cursor: pointer;
   border-radius: 0.5rem;
   margin-top: 1rem;
-  /* font-size: 1.7rem; */
   padding: 1rem 3rem;
-  background: var(--green);
-  color: var(--white);
+  background: var(--vt-c-indigo);
+  color: var(--vt-c-white);
   text-align: center;
 }
 
 .btn:hover {
-  background: var(--black);
+  background: var(--vt-c-black);
 }
-
 
 .container {
   display: grid;
@@ -128,36 +125,32 @@ html {
   display: flex;
   align-items: center;
   justify-content: center;
-  /* min-height: 100vh; */
 }
 
 .admin-product-form-container form {
   max-width: 50rem;
   padding: 2rem;
   border-radius: 0.5rem;
-  background: var(--bg-color);
+  background: var(--vt-c-divider-light-1);
 }
 
 .admin-product-form-container form h3 {
   text-transform: uppercase;
-  color: var(--black);
+  color: var(--vt-c-black);
   margin-bottom: 1rem;
   text-align: center;
-  /* font-size: 2.5rem; */
 }
 
 .admin-product-form-container form .box {
   width: 100%;
   border-radius: 0.5rem;
   padding: 1.2rem 1.5rem;
-  /* font-size: 1.7rem; */
   margin: 1rem 0;
-  background: var(--white);
+  background: var(--vt-c-white);
   text-transform: none;
 }
 
 .product-display {
-  /* margin: 2rem 0; */
   height: 85svh;
   overflow-y: auto;
 }
@@ -168,18 +161,16 @@ html {
 }
 
 .product-display .product-display-table thead {
-  background: var(--bg-color);
+  background: var(--vt-c-divider-light-1);
 }
 
 .product-display .product-display-table th {
   padding: 1rem;
-  /* font-size: 2rem; */
 }
 
 .product-display .product-display-table td {
   padding: 1rem;
-  /* font-size: 2rem; */
-  border-bottom: var(--border);
+  border-bottom: var(--vt-c-text-light-1);
 }
 
 .product-display .product-display-table .btn:first-child {
@@ -191,13 +182,7 @@ html {
 }
 
 .product-display .product-display-table .btn:last-child:hover {
-  background: var(--black);
-}
-
-@media (max-width: 991px) {
-  html {
-    /* font-size: 55%; */
-  }
+  background: var(--vt-c-black);
 }
 
 @media (max-width: 768px) {
@@ -215,10 +200,6 @@ html {
 }
 
 @media (max-width: 450px) {
-  html {
-    /* font-size: 50%; */
-  }
-
   .product-display .product-display-table {
     width: 80rem;
   }
