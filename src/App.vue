@@ -21,20 +21,16 @@ import { RouterLink, RouterView } from 'vue-router';
 <style scoped>
 /* Estilo principal del header */
 header {
-  line-height: 1.5;
+  /* line-height: 1.5; */
   max-height: 100vh;
-  padding: 1rem;
-  border-bottom: 1px solid var(--color-border);
+  padding: .5rem 1rem 0 1rem ;
+  /* border-bottom: 1px solid var(--color-border); */
 }
 
 .logo-nav-container {
   display: flex; /* Para que logo y opciones estén en línea */
   align-items: center; /* Alinear verticalmente el logo y las opciones */
   justify-content: space-between; /* Espacio entre el logo y las opciones */
-}
-
-.logo {
-  margin-right: 2rem;
 }
 
 nav {
