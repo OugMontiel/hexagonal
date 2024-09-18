@@ -40,7 +40,7 @@ export default {
       username: '',
       email: '',
       password: '',
-      googleLoginUrl: `https://${import.meta.env.VITE_EXPRESS_HOST}:${import.meta.env.VITE_EXPRESS_PORT}/users/loginGoogle`, // Ajusta esta URL
+      googleLoginUrl: `https://${import.meta.env.VITE_EXPRESS_HOST}:${import.meta.env.VITE_EXPRESS_PORT}/auth/google`, // Ajusta esta URL
     };
   },
   computed: {

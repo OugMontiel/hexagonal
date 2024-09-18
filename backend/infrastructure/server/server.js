@@ -20,9 +20,12 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const passport = require('passport');
 const passportConfig = require('../../auth/infrastructure/passportConfig'); // Importa la configuración de Passport
+const helmetMiddleware = require('../middlewares/helmet'); // Importa el middleware de helmet
 
 // crear servidor
 const createServer = () => {
+  process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+  
   const app = express();
   app.use(express.json());
 
@@ -61,6 +64,9 @@ const createServer = () => {
 
   // Inicializacion de cookies 
   app.use(cookieParser());
+
+  // Aplica el middleware de helmet
+  app.use(helmetMiddleware);
 
   // Routes
   app.use('/auth', authRouter);

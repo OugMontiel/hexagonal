@@ -43,6 +43,36 @@ class authRepository {
       }
     }
   }
+  async getUserByEmail(email) {
+    try {
+      const auth = new Auth(); // Instancia del modelo Auth para acceder a la base de datos.
+  
+      // Definimos el pipeline para la agregación.
+      let query = [
+        {
+          // Filtramos por email
+          $match: { email },
+        },
+      ];
+  
+      // Ejecutamos el pipeline de agregación en el modelo Auth.
+      const result = await auth.aggregate(query);
+  
+      // Si se encontró un usuario, devolvemos el primer (y único) resultado en el array.
+      return result[0];
+    } catch (error) {
+      // Si el error ya tiene un mensaje específico, lo relanzamos.
+      if (error.message.includes('Email user not found')) {
+        throw error; // Re-lanzamos el error original.
+      } else {
+        // Si ocurre otro tipo de error, lanzamos uno genérico.
+        throw new Error(
+          JSON.stringify({ status: 400, message: 'Error in auth repository' })
+        );
+      }
+    }
+  }
+  
 }
 
 module.exports = authRepository;
