@@ -12,9 +12,9 @@ class authRepository {
       // Definimos el pipeline para la agregación. Esto nos permite ejecutar operaciones más complejas en MongoDB.
       let query = [
         {
-           // Filtramos por los tres valores: nick, password, email
+          // Filtramos por los tres valores: nick, password, email
           $match: { nick, password, email },
-        }
+        },
       ];
 
       // Ejecutamos el pipeline de agregación en el modelo Auth
@@ -46,7 +46,7 @@ class authRepository {
   async getUserByEmail(email) {
     try {
       const auth = new Auth(); // Instancia del modelo Auth para acceder a la base de datos.
-  
+
       // Definimos el pipeline para la agregación.
       let query = [
         {
@@ -54,10 +54,10 @@ class authRepository {
           $match: { email },
         },
       ];
-  
+
       // Ejecutamos el pipeline de agregación en el modelo Auth.
       const result = await auth.aggregate(query);
-  
+
       // Si se encontró un usuario, devolvemos el primer (y único) resultado en el array.
       return result[0];
     } catch (error) {
@@ -72,7 +72,6 @@ class authRepository {
       }
     }
   }
-  
 }
 
 module.exports = authRepository;

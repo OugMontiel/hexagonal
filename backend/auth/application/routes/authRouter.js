@@ -1,7 +1,7 @@
 const express = require('express');
 const passport = require('passport');
 const AuthController = require('../controllers/authController'); // Importa el controlador de autenticación.
-const AuthValidator = require('../validator/authValidator'); 
+const AuthValidator = require('../validator/authValidator');
 
 // enrutador de Express para manejar las rutas específicas de autenticación.
 const router = express.Router();
@@ -9,12 +9,17 @@ const authController = new AuthController();
 const authValidator = new AuthValidator();
 
 // Define la ruta para iniciar sesión mediante sesión Express.
-router.post('/sessionLogin', authValidator.validatorSessionLogin(), (req, res) =>
-    authController.sessionLogin(req, res)
+router.post(
+  '/sessionLogin',
+  authValidator.validatorSessionLogin(),
+  (req, res) => authController.sessionLogin(req, res)
 );
 
 // Ruta para iniciar sesión con Google
-router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
+router.get(
+  '/google',
+  passport.authenticate('google', { scope: ['profile', 'email'] })
+);
 router.get('/google/callback', passport.authenticate('google'), (req, res) => {
   res.redirect('/'); // Redirige a la página principal o donde desees
 });
@@ -33,9 +38,9 @@ router.get('/google/callback', passport.authenticate('google'), (req, res) => {
 
 // Ruta para cerrar sesión
 router.get('/logout', (req, res) => {
-    req.logout();
-    res.redirect('/');
-  });
+  req.logout();
+  res.redirect('/');
+});
 
 // Exporta el enrutador para que pueda ser utilizado en otras partes de la aplicación.
 module.exports = router;

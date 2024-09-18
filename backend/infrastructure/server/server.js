@@ -11,7 +11,7 @@ const productRoutes = require('../../product/application/routes/productRoutes');
 const { jsonParseErrorHandler } = require('../middlewares/errorHandling');
 const { limiTotal } = require('../middlewares/rateLimit');
 // const { auth } = require('../../auth/application/middlewares/authenticateToken');
-const {checkSession} = require('../middlewares/sessionLoging');
+const { checkSession } = require('../middlewares/sessionLoging');
 
 // Permitir conxiones de otros puertos
 const cors = require('cors');
@@ -25,7 +25,7 @@ const helmetMiddleware = require('../middlewares/helmet'); // Importa el middlew
 // crear servidor
 const createServer = () => {
   process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
-  
+
   const app = express();
   app.use(express.json());
 
@@ -49,12 +49,12 @@ const createServer = () => {
       secret: process.env.KEY_SECRET,
       resave: false,
       saveUninitialized: true,
-      cookie: { 
+      cookie: {
         httpOnly: true, // Evita que el cliente acceda a la cookie
         secure: false, // Debe estar en true en producción si usas HTTPS
         maxAge: parseInt(process.env.EXPRESS_EXPIRE), // Tiempo de vida de la cookie (ejemplo: 1 minuto)
         sameSite: 'None', // Permite compartir cookies entre diferentes dominios
-      }
+      },
     })
   );
 
@@ -62,7 +62,7 @@ const createServer = () => {
   app.use(passport.initialize());
   app.use(passport.session());
 
-  // Inicializacion de cookies 
+  // Inicializacion de cookies
   app.use(cookieParser());
 
   // Aplica el middleware de helmet

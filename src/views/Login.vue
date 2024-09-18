@@ -27,7 +27,9 @@
         <fieldset class="password">
           <input type="password" v-model="password" placeholder="Password" />
         </fieldset>
-        <button type="submit" class="btn" :disabled="!isFormValid">Sign up</button>
+        <button type="submit" class="btn" :disabled="!isFormValid">
+          Sign up
+        </button>
       </form>
     </div>
   </div>
@@ -56,18 +58,21 @@ export default {
         // console.log('Port:', import.meta.env.VITE_EXPRESS_PORT);
 
         // Enviamos la solicitud POST con el cuerpo JSON
-        const response = await fetch(`https://${import.meta.env.VITE_EXPRESS_HOST}:${import.meta.env.VITE_EXPRESS_PORT}/auth/sessionLogin`, {
-          method: 'POST',
-          credentials: 'include', // Esto permite que se envíen cookies en la solicitud
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            nick: this.username, // Mapeamos el "username" al "nick" que espera el backend
-            email: this.email,
-            password: this.password,
-          }),
-        });
+        const response = await fetch(
+          `https://${import.meta.env.VITE_EXPRESS_HOST}:${import.meta.env.VITE_EXPRESS_PORT}/auth/sessionLogin`,
+          {
+            method: 'POST',
+            credentials: 'include', // Esto permite que se envíen cookies en la solicitud
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              nick: this.username, // Mapeamos el "username" al "nick" que espera el backend
+              email: this.email,
+              password: this.password,
+            }),
+          }
+        );
 
         // Parseamos la respuesta
         const data = await response.json();
@@ -219,7 +224,11 @@ body {
 button {
   width: 100%;
   outline: none !important;
-  background: linear-gradient(-5deg, var(--vt-c-indigo), var(--vt-c-text-light-1)); /* Fondo gradiente usando índigo */
+  background: linear-gradient(
+    -5deg,
+    var(--vt-c-indigo),
+    var(--vt-c-text-light-1)
+  ); /* Fondo gradiente usando índigo */
   border: none;
   text-transform: uppercase;
   font-weight: bold;

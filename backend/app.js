@@ -12,8 +12,12 @@ const startApp = async () => {
   const app = createServer();
 
   // Cargar certificado y clave privada
-  const privateKey = fs.readFileSync('./backend/infrastructure/ssl/private.key'); 
-  const certificate = fs.readFileSync('./backend/infrastructure/ssl/certificate.crt');
+  const privateKey = fs.readFileSync(
+    './backend/infrastructure/ssl/private.key'
+  );
+  const certificate = fs.readFileSync(
+    './backend/infrastructure/ssl/certificate.crt'
+  );
 
   // Crear servidor HTTPS
   const httpsServer = https.createServer(
@@ -28,7 +32,9 @@ const startApp = async () => {
   httpsServer.listen(
     { port: process.env.EXPRESS_PORT, host: process.env.EXPRESS_HOST },
     () => {
-      console.log(`Server running at https://${process.env.EXPRESS_HOST}:${process.env.EXPRESS_PORT}`);
+      console.log(
+        `Server running at https://${process.env.EXPRESS_HOST}:${process.env.EXPRESS_PORT}`
+      );
     }
   );
 };

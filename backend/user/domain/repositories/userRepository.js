@@ -32,7 +32,7 @@ class UserRepository {
         );
       }
       // console.log(result[0]);
-      
+
       return result[0]; // Retornamos el primer (y único) resultado
     } catch (error) {
       // Si el error ya tiene un mensaje específico, lo relanzamos
@@ -41,7 +41,7 @@ class UserRepository {
       } else {
         // Si es un error inesperado, lanzamos uno genérico
         throw new Error(
-          JSON.stringify({ status: 400, message: 'Error in user repository'})
+          JSON.stringify({ status: 400, message: 'Error in user repository' })
         );
       }
     }

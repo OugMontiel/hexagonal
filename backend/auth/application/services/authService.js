@@ -7,8 +7,12 @@ class authService {
   }
   async getauthByNickPasswordAndEmail(nick, password, email) {
     // Lógica para obtener el usuario desde el repositorio con las tres credenciales
-    const auth = await this.authRepository.getNickByNickPasswordAndEmail(nick, password, email);
-  
+    const auth = await this.authRepository.getNickByNickPasswordAndEmail(
+      nick,
+      password,
+      email
+    );
+
     if (!auth) {
       throw new Error(
         JSON.stringify({
@@ -19,7 +23,7 @@ class authService {
     }
 
     return auth.nick; // Devuelve el nickname si las credenciales son correctas
-  }  
+  }
 }
 
 module.exports = authService;

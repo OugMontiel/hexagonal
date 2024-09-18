@@ -15,7 +15,7 @@ passport.use(
     },
     async (accessToken, refreshToken, profile, done) => {
       try {
-        const User = new AuthRepository()
+        const User = new AuthRepository();
         // Busca si el usuario ya existe en la base de datos
         let user = await User.getUserByEmail(profile.emails[0].value);
 
@@ -24,16 +24,18 @@ passport.use(
             // Datos del nuevo usuario a crear
             const newUser = {
               cedula: '', // Si no tienes este dato, puedes asignar algo por defecto o pedirlo luego
-              names: profile.name.givenName || profile.displayName.split(' ')[0],
-              surnames: profile.name.familyName || profile.displayName.split(' ')[1],
+              names:
+                profile.name.givenName || profile.displayName.split(' ')[0],
+              surnames:
+                profile.name.familyName || profile.displayName.split(' ')[1],
               nick: profile.displayName.split(' ').join('_').toLowerCase(), // Genera un nick basado en el nombre
               email: profile.emails[0].value,
               password: profile.id, // Usa una contraseña generada o segura
               phone: 'N/A', // Puedes asignar un valor por defecto o pedir este dato más tarde
-              role: 'Usuario Estandar' // Asigna el rol que desees, en este caso 'Usuario'
+              role: 'Usuario Estandar', // Asigna el rol que desees, en este caso 'Usuario'
             };
             // console.log('newUser',newUser);
-        
+
             // Hacer la solicitud POST con fetch para crear el usuario
             const response = await fetch('https://localhost:3000/users/', {
               method: 'POST',
@@ -42,23 +44,24 @@ passport.use(
               },
               body: JSON.stringify(newUser), // Convierte el objeto newUser a JSON para enviar
             });
-        
+
             // Verificar si la respuesta es exitosa (HTTP 200-299)
             if (!response.ok) {
-              throw new Error(`Error en la creación del usuario: ${response.statusText}`);
+              throw new Error(
+                `Error en la creación del usuario: ${response.statusText}`
+              );
             }
-        
+
             // Obtener los datos de la respuesta (el nuevo usuario creado)
             const createdUser = await response.json();
-        
+
             // Asignamos el nuevo usuario a la variable user
             user = createdUser;
-        
           } catch (error) {
             console.error('Error al crear el usuario:', error);
             throw new Error('Error al crear el usuario con Google');
           }
-        }        
+        }
         return done(null, user); // Pasa el usuario a Passport para manejar la sesión
       } catch (err) {
         return done(err, false);

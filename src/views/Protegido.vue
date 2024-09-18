@@ -1,19 +1,54 @@
 <template>
-
   <span class="message">MVC by express</span>
   <div class="container">
     <div class="admin-product-form-container">
-      <form id="myForm" action="/user/v1" method="POST"> <!-- enctype="multipart/form-data" -->
+      <form id="myForm" action="/user/v1" method="POST">
+        <!-- enctype="multipart/form-data" -->
         <h3>add a new info</h3>
-        <input type="number" placeholder="Enter the user code" name="codigo" class="box">
-        <input type="text" placeholder="Enter the username" name="nombre" class="box">
-        <input type="text" placeholder="Enter the user's last name" name="apellido" class="box">
-        <input type="text" placeholder="Enter the user's nickname" name="nick" class="box">
-        <input type="email" placeholder="Enter the user's email" name="corro_electronico" class="box">
-        <input type="number" placeholder="Enter the user's phone number" name="telefono" class="box">
-        <input type="rol" placeholder="Enter the user role" name="rol" class="box">
+        <input
+          type="number"
+          placeholder="Enter the user code"
+          name="codigo"
+          class="box"
+        />
+        <input
+          type="text"
+          placeholder="Enter the username"
+          name="nombre"
+          class="box"
+        />
+        <input
+          type="text"
+          placeholder="Enter the user's last name"
+          name="apellido"
+          class="box"
+        />
+        <input
+          type="text"
+          placeholder="Enter the user's nickname"
+          name="nick"
+          class="box"
+        />
+        <input
+          type="email"
+          placeholder="Enter the user's email"
+          name="corro_electronico"
+          class="box"
+        />
+        <input
+          type="number"
+          placeholder="Enter the user's phone number"
+          name="telefono"
+          class="box"
+        />
+        <input
+          type="rol"
+          placeholder="Enter the user role"
+          name="rol"
+          class="box"
+        />
         <!-- <input type="file" accept="image/png, image/jpeg, image/jpg" name="product_image" class="box"> -->
-        <input type="submit" class="btn" name="add" value="add">
+        <input type="submit" class="btn" name="add" value="add" />
       </form>
     </div>
     <div class="product-display">
@@ -32,7 +67,7 @@
         </thead>
         <tbody id="myTbody">
           <tr>
-            <td><img src="//" height="100" alt=""></td>
+            <td><img src="//" height="100" alt="" /></td>
             <td contenteditable></td>
             <td></td>
             <td></td>
@@ -49,7 +84,6 @@
       </table>
     </div>
   </div>
-
 </template>
 <style scoped>
 * {
@@ -72,7 +106,7 @@ html {
   display: block;
   width: 100%;
   cursor: pointer;
-  border-radius: .5rem;
+  border-radius: 0.5rem;
   margin-top: 1rem;
   font-size: 1.7rem;
   padding: 1rem 3rem;
@@ -105,13 +139,12 @@ html {
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-
 }
 
 .admin-product-form-container form {
   max-width: 50rem;
   padding: 2rem;
-  border-radius: .5rem;
+  border-radius: 0.5rem;
   background: var(--bg-color);
 }
 
@@ -125,7 +158,7 @@ html {
 
 .admin-product-form-container form .box {
   width: 100%;
-  border-radius: .5rem;
+  border-radius: 0.5rem;
   padding: 1.2rem 1.5rem;
   font-size: 1.7rem;
   margin: 1rem 0;
@@ -154,7 +187,6 @@ html {
   font-size: 2rem;
 }
 
-
 .product-display .product-display-table td {
   padding: 1rem;
   font-size: 2rem;
@@ -173,15 +205,13 @@ html {
   background: var(--black);
 }
 
-@media (max-width:991px) {
-
+@media (max-width: 991px) {
   html {
     font-size: 55%;
   }
-
 }
 
-@media (max-width:768px) {
+@media (max-width: 768px) {
   .container {
     flex-direction: column;
     align-items: center;
@@ -193,11 +223,9 @@ html {
     height: 100svh;
     overflow-y: scroll;
   }
-
 }
 
-@media (max-width:450px) {
-
+@media (max-width: 450px) {
   html {
     font-size: 50%;
   }
