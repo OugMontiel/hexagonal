@@ -10,8 +10,8 @@ const productRoutes = require('../../product/application/routes/productRoutes');
 // carga de middlewares
 const { jsonParseErrorHandler } = require('../middlewares/errorHandling');
 const { limiTotal } = require('../middlewares/rateLimit');
-const { auth } = require('../../auth/application/middlewares/authenticateToken');
-const sessionAuth = require('../../auth/application/middlewares/sessionLogin');
+// const { auth } = require('../../auth/application/middlewares/authenticateToken');
+const {checkSession} = require('../middlewares/sessionLoging');
 
 // Permitir conxiones de otros puertos
 const cors = require('cors');
@@ -19,7 +19,7 @@ const cors = require('cors');
 // configuracion para login
 const cookieParser = require('cookie-parser');
 const passport = require('passport');
-const passportConfig = require('../../auth/infrastructure/passportConfig'); // Importa la configuración de Passport
+// const passportConfig = require('../../auth/infrastructure/passportConfig'); // Importa la configuración de Passport
 
 // crear servidor
 const createServer = () => {
@@ -45,7 +45,7 @@ const createServer = () => {
     session({
       secret: process.env.KEY_SECRET,
       resave: false,
-      saveUninitialized: false,
+      saveUninitialized: true,
       cookie: { 
         httpOnly: true, // Evita que el cliente acceda a la cookie
         secure: false, // Debe estar en true en producción si usas HTTPS
@@ -65,7 +65,7 @@ const createServer = () => {
   // Routes
   app.use('/auth', authRouter);
   app.use('/users', userRoutes);
-  app.use('/producto', sessionAuth, auth, productRoutes);
+  app.use('/producto', checkSession, productRoutes);
 
   return app;
 };
