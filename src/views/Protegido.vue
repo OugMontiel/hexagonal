@@ -1,5 +1,4 @@
 <template>
-  <span class="message">MVC by express</span>
   <div class="container">
     <div class="admin-product-form-container">
       <form id="myForm" action="/user/v1" method="POST">
@@ -47,7 +46,7 @@
           name="rol"
           class="box"
         />
-        <!-- <input type="file" accept="image/png, image/jpeg, image/jpg" name="product_image" class="box"> -->
+        <input type="file" accept="image/png, image/jpeg, image/jpg" name="product_image" class="box">
         <input type="submit" class="btn" name="add" value="add" />
       </form>
     </div>
@@ -98,7 +97,7 @@
 }
 
 html {
-  font-size: 62.5%;
+  /* font-size: 62.5%; */
   overflow-x: hidden;
 }
 
@@ -108,7 +107,7 @@ html {
   cursor: pointer;
   border-radius: 0.5rem;
   margin-top: 1rem;
-  font-size: 1.7rem;
+  /* font-size: 1.7rem; */
   padding: 1rem 3rem;
   background: var(--green);
   color: var(--white);
@@ -119,26 +118,17 @@ html {
   background: var(--black);
 }
 
-.message {
-  display: block;
-  background: var(--bg-color);
-  padding: 1.5rem 1rem;
-  font-size: 2rem;
-  color: var(--black);
-  margin-bottom: 2rem;
-  text-align: center;
-}
 
 .container {
-  display: flex;
-  justify-content: space-around;
+  display: grid;
+  grid-template-columns: 3fr 7fr;
 }
 
 .admin-product-form-container.centered {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
+  /* min-height: 100vh; */
 }
 
 .admin-product-form-container form {
@@ -153,14 +143,14 @@ html {
   color: var(--black);
   margin-bottom: 1rem;
   text-align: center;
-  font-size: 2.5rem;
+  /* font-size: 2.5rem; */
 }
 
 .admin-product-form-container form .box {
   width: 100%;
   border-radius: 0.5rem;
   padding: 1.2rem 1.5rem;
-  font-size: 1.7rem;
+  /* font-size: 1.7rem; */
   margin: 1rem 0;
   background: var(--white);
   text-transform: none;
@@ -168,7 +158,6 @@ html {
 
 .product-display {
   /* margin: 2rem 0; */
-  width: 65%;
   height: 85svh;
   overflow-y: auto;
 }
@@ -184,12 +173,12 @@ html {
 
 .product-display .product-display-table th {
   padding: 1rem;
-  font-size: 2rem;
+  /* font-size: 2rem; */
 }
 
 .product-display .product-display-table td {
   padding: 1rem;
-  font-size: 2rem;
+  /* font-size: 2rem; */
   border-bottom: var(--border);
 }
 
@@ -207,7 +196,7 @@ html {
 
 @media (max-width: 991px) {
   html {
-    font-size: 55%;
+    /* font-size: 55%; */
   }
 }
 
@@ -227,7 +216,7 @@ html {
 
 @media (max-width: 450px) {
   html {
-    font-size: 50%;
+    /* font-size: 50%; */
   }
 
   .product-display .product-display-table {
