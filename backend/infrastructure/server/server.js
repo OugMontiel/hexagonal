@@ -19,7 +19,7 @@ const cors = require('cors');
 // configuracion para login
 const cookieParser = require('cookie-parser');
 const passport = require('passport');
-// const passportConfig = require('../../auth/infrastructure/passportConfig'); // Importa la configuración de Passport
+const passportConfig = require('../../auth/infrastructure/passportConfig'); // Importa la configuración de Passport
 
 // crear servidor
 const createServer = () => {

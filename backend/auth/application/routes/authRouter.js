@@ -31,5 +31,11 @@ router.get('/google/callback', passport.authenticate('google'), (req, res) => {
 //   res.redirect('/'); // Redirige a la página principal o donde desees
 // });
 
+// Ruta para cerrar sesión
+router.get('/logout', (req, res) => {
+    req.logout();
+    res.redirect('/');
+  });
+
 // Exporta el enrutador para que pueda ser utilizado en otras partes de la aplicación.
 module.exports = router;
