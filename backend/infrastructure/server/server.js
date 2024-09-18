@@ -47,7 +47,10 @@ const createServer = () => {
       resave: false,
       saveUninitialized: false,
       cookie: { 
-        secure: true
+        httpOnly: true, // Evita que el cliente acceda a la cookie
+        secure: false, // Debe estar en true en producción si usas HTTPS
+        maxAge: parseInt(process.env.EXPRESS_EXPIRE), // Tiempo de vida de la cookie (ejemplo: 1 minuto)
+        sameSite: 'None', // Permite compartir cookies entre diferentes dominios
       }
     })
   );
