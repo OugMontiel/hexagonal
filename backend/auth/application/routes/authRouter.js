@@ -21,7 +21,7 @@ router.get(
   passport.authenticate('google', { scope: ['profile', 'email'] })
 );
 router.get('/google/callback', passport.authenticate('google'), (req, res) => {
-  res.redirect('/'); // Redirige a la página principal o donde desees
+  res.redirect('http://localhost:5173/Protegido'); // Redirige a la página principal o donde desees
 });
 
 // // Ruta para iniciar sesión con Facebook
