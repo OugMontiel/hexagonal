@@ -5,10 +5,4 @@
   --vt-c-indigo: #2c3e50;
   --vt-c-divider-light-1: rgba(60, 60, 60, 0.29);
   --vt-c-text-light-1: var(--vt-c-indigo);
-  --green: #27ae60;
-  --black: #333;
-  --white: #fff;
-  --bg-color: #eee;
-  --box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
-  --border: 0.1rem solid var(--black);
 }
