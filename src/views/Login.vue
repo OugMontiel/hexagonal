@@ -1,11 +1,12 @@
 <template>
   <div class="signup">
     <div class="signup-connect">
-      <h1>Create your account</h1>
+      <h2 v-if="!isSignUpMode">Log in to your account</h2>
+      <h2 v-else>Create your account</h2>
       <a href="#" class="btn btn-social btn-facebook">
         <i class="pi pi-facebook"></i> Sign in with Facebook
       </a>
-      <a :href="googleLoginUrl" class="btn btn-social btn-twitter">
+      <a :href="googleLoginUrl" class="btn btn-social btn-google">
         <i class="pi pi-google"></i> Sign in with Google
       </a>
       <a href="#" class="btn btn-social btn-discord">
@@ -15,10 +16,13 @@
         <i class="pi pi-linkedin"></i> Sign in with LinkedIn
       </a>
     </div>
+
     <div class="signup-classic">
-      <h2>Or use the classical way</h2>
-      <form @submit.prevent="signUp" class="form">
-        <fieldset class="username">
+      <h2 v-if="!isSignUpMode">Or log in the classical way</h2>
+      <h2 v-else>Or create your account the classical way</h2>
+      
+      <form @submit.prevent="isSignUpMode ? signUp() : logIn()" class="form">
+        <fieldset class="username" v-if="isSignUpMode">
           <input type="text" v-model="username" placeholder="Username" />
         </fieldset>
         <fieldset class="email">
@@ -28,9 +32,18 @@
           <input type="password" v-model="password" placeholder="Password" />
         </fieldset>
         <button type="submit" class="btn" :disabled="!isFormValid">
-          Sign up
+          {{ isSignUpMode ? 'Sign up' : 'Log in' }}
         </button>
       </form>
+
+      <div class="toggle-auth">
+        <p v-if="!isSignUpMode">Don't have an account? 
+          <a href="#" @click.prevent="isSignUpMode = true">Sign up here</a>
+        </p>
+        <p v-else>Already have an account? 
+          <a href="#" @click.prevent="isSignUpMode = false">Log in here</a>
+        </p>
+      </div>
     </div>
   </div>
 </template>
@@ -42,55 +55,52 @@ export default {
       username: '',
       email: '',
       password: '',
+      isSignUpMode: false, // Variable para alternar entre login y registro
       googleLoginUrl: `https://${import.meta.env.VITE_EXPRESS_HOST}:${import.meta.env.VITE_EXPRESS_PORT}/auth/google`, // Ajusta esta URL
     };
   },
   computed: {
     isFormValid() {
-      // Verificamos que los tres campos estén llenos
-      return this.username && this.email && this.password;
+      // Verificamos que el formulario es válido. Para registro, se requiere username
+      return this.email && this.password && (this.isSignUpMode ? this.username : true);
     },
   },
   methods: {
-    async signUp() {
+    async signUpOrLogIn() {
       try {
-        // console.log('Host:', import.meta.env.VITE_EXPRESS_HOST);
-        // console.log('Port:', import.meta.env.VITE_EXPRESS_PORT);
+        const url = `https://${import.meta.env.VITE_EXPRESS_HOST}:${import.meta.env.VITE_EXPRESS_PORT}/auth/sessionLogin`;
+        const body = {
+          email: this.email,
+          password: this.password,
+        };
+
+        // Si está en modo registro, añadimos el nombre de usuario
+        if (this.isSignUpMode) {
+          body.nick = this.username;
+        }
 
         // Enviamos la solicitud POST con el cuerpo JSON
-        const response = await fetch(
-          `https://${import.meta.env.VITE_EXPRESS_HOST}:${import.meta.env.VITE_EXPRESS_PORT}/auth/sessionLogin`,
-          {
-            method: 'POST',
-            credentials: 'include', // Esto permite que se envíen cookies en la solicitud
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              nick: this.username, // Mapeamos el "username" al "nick" que espera el backend
-              email: this.email,
-              password: this.password,
-            }),
-          }
-        );
+        const response = await fetch(url, {
+          method: 'POST',
+          credentials: 'include', // Esto permite que se envíen cookies en la solicitud
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(body),
+        });
 
-        // Parseamos la respuesta
         const data = await response.json();
 
-        // console.log('response.data', data);
-
         if (response.ok) {
-          // Manejo del éxito (redireccionar, mostrar mensaje, etc.)
-          console.log('Login successful:', data);
-          // Puedes guardar el token en localStorage o redirigir a otra página
+          console.log(`${this.isSignUpMode ? 'Signup' : 'Login'} successful:`, data);
+          // Manejo del éxito (guardar token, redireccionar, etc.)
         } else {
-          // Manejo del error
-          console.error('Login failed:', data.message);
-          alert('Login failed: ' + data.message);
+          console.error(`${this.isSignUpMode ? 'Signup' : 'Login'} failed:`, data.message);
+          alert(`${this.isSignUpMode ? 'Signup' : 'Login'} failed: ` + data.message);
         }
       } catch (error) {
         console.error('Error:', error);
-        alert('An error occurred during login');
+        alert(`An error occurred during ${this.isSignUpMode ? 'signup' : 'login'}`);
       }
     },
   },
@@ -133,6 +143,9 @@ body {
 .signup-classic {
   width: 50%;
   padding: 30px 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; 
 }
 
 .signup-connect {
@@ -140,9 +153,6 @@ body {
   color: var(--vt-c-white); /* Texto blanco */
 
   h1 {
-    font-size: 30px;
-    margin-top: 10px;
-    margin-bottom: 40px;
     text-shadow: 0 2px 3px var(--vt-c-divider-light-1); /* Sombra ligera */
   }
 }
@@ -150,8 +160,6 @@ body {
 .signup-classic h2 {
   font-size: 16px;
   font-weight: normal;
-  margin-top: 23px;
-  margin-bottom: 43px;
   text-shadow: 0 2px 3px var(--vt-c-divider-light-1); /* Sombra ligera */
 }
 
@@ -160,7 +168,6 @@ body {
   background: var(--vt-c-indigo); /* Fondo índigo */
   color: var(--vt-c-white); /* Texto blanco */
   text-decoration: none;
-  margin: 20px 0;
   padding: 15px 15px;
   border-radius: 5px;
   position: relative;
@@ -189,7 +196,7 @@ body {
   background-color: #3b5998;
 }
 
-.btn-twitter {
+.btn-google {
   background-color: #00aced;
 }
 

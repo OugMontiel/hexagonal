@@ -33,7 +33,7 @@
 
 <style scoped>
 .home-container {
-  padding: 2rem;
+  padding: 1rem;
   text-align: center;
 }
 
