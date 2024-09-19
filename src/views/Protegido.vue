@@ -41,7 +41,7 @@
           class="box"
         />
         <input
-          type="rol"
+          type="text"
           placeholder="Enter the user role"
           name="rol"
           class="box"
@@ -84,6 +84,7 @@
     </div>
   </div>
 </template>
+
 <style scoped>
 * {
   font-family: 'Poppins', sans-serif;
@@ -107,9 +108,10 @@ html {
   border-radius: 0.5rem;
   margin-top: 1rem;
   padding: 1rem 3rem;
-  background: var(--vt-c-indigo);
+  background: var(--vt-c-divider-light-1);
   color: var(--vt-c-white);
   text-align: center;
+  border: 1px solid var(--vt-c-black); /* Ajusta el grosor, estilo y color del borde aquí */
 }
 
 .btn:hover {
@@ -117,26 +119,28 @@ html {
 }
 
 .container {
+  padding: 1rem;
   display: grid;
   grid-template-columns: 3fr 7fr;
+  gap: 1rem; /* Espacio entre columnas */
 }
 
-.admin-product-form-container.centered {
+.admin-product-form-container {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .admin-product-form-container form {
+  color: var(--vt-c-white);
   max-width: 50rem;
-  padding: 2rem;
+  padding: .8rem;
   border-radius: 0.5rem;
-  background: var(--vt-c-divider-light-1);
+  background: var(--vt-c-indigo);
 }
 
-.admin-product-form-container form h3 {
+.admin-product-form-container form {
   text-transform: uppercase;
-  color: var(--vt-c-black);
   margin-bottom: 1rem;
   text-align: center;
 }
@@ -144,8 +148,8 @@ html {
 .admin-product-form-container form .box {
   width: 100%;
   border-radius: 0.5rem;
-  padding: 1.2rem 1.5rem;
-  margin: 1rem 0;
+  padding: .8rem ;
+  margin: .5rem 0;
   background: var(--vt-c-white);
   text-transform: none;
 }
@@ -170,7 +174,7 @@ html {
 
 .product-display .product-display-table td {
   padding: 1rem;
-  border-bottom: var(--vt-c-text-light-1);
+  border-bottom: 1px solid var(--vt-c-text-light-1);
 }
 
 .product-display .product-display-table .btn:first-child {
@@ -187,6 +191,7 @@ html {
 
 @media (max-width: 768px) {
   .container {
+    grid-template-columns: 1fr; /* Cambia a una sola columna en pantallas pequeñas */
     flex-direction: column;
     align-items: center;
   }
@@ -201,7 +206,7 @@ html {
 
 @media (max-width: 450px) {
   .product-display .product-display-table {
-    width: 80rem;
+    width: 100%;
   }
 }
 </style>
